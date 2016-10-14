@@ -20,6 +20,7 @@ import java.util.Date;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 
+import com.ebay.xcelite.styles.CellStylesBank;
 import com.ebay.xcelite.sheet.XceliteSheet;
 
 /**
@@ -40,6 +41,7 @@ public abstract class SheetWriterAbs<T> implements SheetWriter<T> {
   }
   
   protected void writeToCell(Cell cell, Object fieldValueObj, Class<?> dataType) {
+    cell.setCellStyle(CellStylesBank.get(sheet.getNativeSheet().getWorkbook()).getBoldStyle());
     if(fieldValueObj==null){
       cell.setCellType(CellType.BLANK);
       cell.setCellValue("");

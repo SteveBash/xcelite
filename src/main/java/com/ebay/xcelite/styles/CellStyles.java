@@ -26,6 +26,7 @@ public final class CellStyles {
   
   private final Workbook wb;
   private CellStyle boldStyle;
+  private CellStyle textStyle;
   private CellStyle dateStyle;
 
   public CellStyles(Workbook wb) {
@@ -38,17 +39,29 @@ public final class CellStyles {
     createDateFormatStyle();
   }
 
+  private void createTextStyle() {
+    textStyle = wb.createCellStyle();
+    DataFormat df = wb.createDataFormat();
+    textStyle.setDataFormat(df.getFormat("@"));
+  }
+
   private void createBoldStyle() {
     boldStyle = wb.createCellStyle();
     Font font = wb.createFont();
     font.setBoldweight(Font.BOLDWEIGHT_BOLD);
     boldStyle.setFont(font);    
+    DataFormat df = wb.createDataFormat();
+    boldStyle.setDataFormat(df.getFormat("@"));
   }
   
   private void createDateFormatStyle() {
     dateStyle = wb.createCellStyle();
     DataFormat df = wb.createDataFormat();
     dateStyle.setDataFormat(df.getFormat(DEFAULT_DATE_FORMAT));
+  }
+
+  public CellStyle getTextStyle() {
+    return textStyle;
   }
   
   public CellStyle getBoldStyle() {
